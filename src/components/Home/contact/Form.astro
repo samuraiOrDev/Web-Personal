@@ -1,0 +1,63 @@
+---
+import Input from "./Input.astro";
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get("name");
+    const email = data.get("email");
+    const subject = data.get("subject");
+    const message = data.get("message");
+    console.log({ name, email, subject, message });
+
+    // Do something with the data
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+---
+
+<form class="mt-6 w-full md:w-1/2" method="POST">
+  <Input
+    type="text"
+    name="name"
+    label="Nombre:"
+    placeholder="Name"
+    placeholder="John Doe"
+    id="field-1"
+  />
+  <Input
+    type="email"
+    name="email"
+    label="Correo electrónico:"
+    placeholder="example@gmail.com"
+    id="field-2"
+  />
+  <Input
+    id="field-3"
+    type="text"
+    name="subject"
+    label="Asunto:"
+    placeholder="Asunto/Cuestión/Motivo"
+  />
+  <div class="mb-6">
+    <label for="message" class="block mb-2 text-sm font-medium text-white">
+      Comentario:
+    </label>
+    <textarea
+      id="field-4"
+      rows={4}
+      name="message"
+      class="block p-2.5 w-full text-sm rounded-lg border bg-gray-950 border-yellow-600 placeholder-yellow-600/40 text-yellow-600 focus:ring-yellow-600 focus:border-yellow-500 outline-none"
+      placeholder="Deje su comentario..."></textarea>
+  </div>
+
+  <button
+    type="submit"
+    class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-main"
+  >
+    Enviar
+  </button>
+</form>

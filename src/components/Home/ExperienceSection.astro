@@ -1,0 +1,15 @@
+---
+import { experienceSection } from "../../data/siteConfig";
+import ElementH2 from "../ui/ElementH2.astro";
+import ElementP from "../ui/ElementP.astro";
+import Timeline from "./timeLine/Timeline";
+---
+
+<section
+  class="flex justify-center flex-col items-center sm:px-16 px-6 sm:pb-16 xs:pb-8 pb-12 sm:pt-6 mt-[40px] overflow-x-hidden"
+  id="experience-section"
+>
+  <ElementH2 mainTitle={experienceSection.title} textGradient />
+  <ElementP description={experienceSection.description} />
+  <Timeline data={experienceSection.experience} client:visible />
+</section>

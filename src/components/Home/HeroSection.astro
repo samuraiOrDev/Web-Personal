@@ -1,0 +1,30 @@
+---
+import { heroSectionText } from "../../data/siteConfig";
+const { heroSectionButtons } = heroSectionText;
+import Button from "../ui/Button.astro";
+---
+
+<section class="flex justify-center items-center h-screen" id="hero-section">
+  <div class="text-center w-full xl:max-w-[1280px]  mx-auto gap-5">
+    <p class="sm:text-[20px] text-[16px] lg:leading-[27px] leading-[23px] font-semibold text-primary mb-5">
+      {heroSectionText.supTitle}
+    </p>
+    <h1 class="font-bold text-[40px] lg:text-[64px] lg:leading-[70px] leading-[46px] tracking-[-0.5%]">
+      {heroSectionText.title}
+      <span class="text-gradient">{heroSectionText.subTitle}</span>
+    </h1>
+    <p class="sm:text-[20px] text-[16px] lg:leading-[27px] leading-[23px] mt-5 mb-10 font-normal">
+      {heroSectionText.descriptionSup}
+      <br />
+      {heroSectionText.descriptionSub}
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-3">
+      {
+        heroSectionButtons.map(({ bgColor, title, to, target }) => (
+          <Button to={to} title={title} target={target} bgColor={bgColor} />
+        ))
+      }
+    </div>
+  </div>
+</section>
+

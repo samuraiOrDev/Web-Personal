@@ -1,0 +1,187 @@
+---
+import ElementH2 from "../ui/ElementH2.astro";
+import ElementP from "../ui/ElementP.astro";
+import { skillsSection } from "../../data/siteConfig";
+import JavaScript from "../Svg/skills/langs/JavaScript.astro";
+import TypeScript from "../Svg/skills/langs/TypeScript.astro";
+import Java from "../Svg/skills/langs/Java.astro";
+import Python from "../Svg/skills/langs/Python.astro";
+import Html from "../Svg/skills/frontend/Html.astro";
+import Css from "../Svg/skills/frontend/Css.astro";
+import React from "../Svg/skills/frontend/React.astro";
+import Next from "../Svg/skills/frontend/Next.astro";
+import Tailwind from "../Svg/skills/frontend/Tailwind.astro";
+import Jquery from "../Svg/skills/frontend/Jquery.astro";
+import AstroLogo from "../Svg/skills/frontend/AstroLogo.astro";
+import Node from "../Svg/skills/backend/Node.astro";
+import Express from "../Svg/skills/backend/Express.astro";
+import Spring from "../Svg/skills/backend/Spring.astro";
+import Nest from "../Svg/skills/backend/Nest.astro";
+import Mongo from "../Svg/skills/backend/Mongo.astro";
+import PostgreSQL from "../Svg/skills/backend/PostgreSQL.astro";
+import OracleSQL from "../Svg/skills/backend/OracleSQL.astro";
+
+const allSkills = [
+  {
+    title: "Lenguajes",
+    elements: [
+      {
+        text: "JavaScript",
+        icon: JavaScript,
+      },
+      {
+        text: "TypeScript",
+        icon: TypeScript,
+      },
+      {
+        text: "Java",
+        icon: Java,
+      },
+      {
+        text: "Python",
+        icon: Python,
+      },
+    ],
+  },
+  {
+    title: "Frontend",
+    elements: [
+      {
+        text: "HTML",
+        icon: Html,
+      },
+      {
+        text: "CSS",
+        icon: Css,
+      },
+      {
+        text: "React",
+        icon: React,
+      },
+      {
+        text: "Next",
+        icon: Next,
+      },
+      {
+        text: "Astro",
+        icon: AstroLogo,
+      },
+      {
+        text: "Tailwind",
+        icon: Tailwind,
+      },
+      {
+        text: "Jquery",
+        icon: Jquery,
+      },
+    ],
+  },
+  {
+    title: "Backend",
+    elements: [
+      {
+        text: "Node",
+        icon: Node,
+      },
+      {
+        text: "Express",
+        icon: Express,
+      },
+      {
+        text: "Spring",
+        icon: Spring,
+      },
+      {
+        text: "Nest",
+        icon: Nest,
+      },
+      {
+        text: "MongoDB",
+        icon: Mongo,
+      },
+      {
+        text: "PostgreSQL",
+        icon: PostgreSQL,
+      },
+      {
+        text: "Oracle",
+        icon: OracleSQL,
+      },
+    ],
+  },
+];
+const labels = ["Lenguajes", "Frontend", "Backend"];
+---
+
+<section
+  class="flex justify-center flex-col items-center mx-auto xl:max-w-[1280px] w-full sm:px-16 px-6 sm:pb-16 xs:pb-8 pb-12 sm:pt-6 mt-[40px] overflow-x-hidden"
+  id="skills-section"
+>
+  <ElementH2 mainTitle={skillsSection.title} textGradient />
+  <ElementP description={skillsSection.description} />
+  <div
+    class="bg-gradient-to-b from-zinc-900 to-transparent w-full md:max-w-3xl min-h-96 mt-[40px] rounded-lg shadow-slate-600"
+  >
+    <div
+      class="p-2 flex items-center justify-center gap-3 mt-4 font-bold mb-[40px]"
+    >
+      {
+        labels.map((label, index) => (
+          <p
+            data-label={label}
+            class:list={[
+              "cursor-pointer skill-label",
+              index == 0 && "text-primary",
+            ]}
+          >
+            {label}
+          </p>
+        ))
+      }
+    </div>
+
+    <div>
+      {
+        allSkills.map((skill, index) => (
+          <div
+            class:list={[
+              "flex items-center justify-evenly gap-6 flex-wrap skill max-w-[450px] m-auto",
+              index == 0 && "fadeIn",
+            ]}
+            data-content={skill.title}
+          >
+            {skill.elements.map(({ text, icon: Icon }) => (
+              <div class="flex flex-col items-center justify-center">
+                <Icon size={64} />
+              </div>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const labels = document.querySelectorAll(".skill-label");
+    const skills = document.querySelectorAll(".skill");
+    skills.forEach((skill, index) => {
+      if (index !== 0) skill.classList.add("hidden");
+    });
+
+    labels.forEach((label) => {
+      label.addEventListener("click", () => {
+        labels.forEach((l) => l.classList.remove("text-primary"));
+        label.classList.add("text-primary");
+        const selectedLabel = (label as HTMLElement).dataset.label;
+        skills.forEach((skill: Element) => {
+          const { style } = skill as HTMLElement;
+          const { content } = (skill as HTMLElement).dataset || {};
+          skill.classList.toggle("fadeIn", content === selectedLabel);
+          style.display = selectedLabel === content ? "flex" : "none";
+        });
+      });
+    });
+  });
+</script>

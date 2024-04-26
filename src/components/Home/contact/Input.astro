@@ -1,0 +1,25 @@
+---
+interface Props {
+  name: string;
+  id: string;
+  placeholder: string;
+  type: "text" | "email" | "password";
+  label: string;
+}
+const { name, id, placeholder, type, label } = Astro.props as Props;
+---
+
+<div class="mb-6">
+  <label for="name" class="block mb-2 text-sm font-medium text-white"
+    >{label}</label
+  >
+
+  <input
+    type={type}
+    id={id}
+    name={name}
+    class="border text-sm rounded-lg focus:ring-yellow-500 focus:border-primary block w-full p-2.5 bg-gray-950 border-yellow-600 placeholder-yellow-600/40 text-primary outline-none"
+    required
+    placeholder={placeholder}
+  />
+</div>

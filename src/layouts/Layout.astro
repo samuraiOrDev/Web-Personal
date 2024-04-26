@@ -1,0 +1,98 @@
+---
+// Astro
+import { ViewTransitions } from "astro:transitions";
+// Owner
+
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import ScrollButtonComponent from "../components/ScrollButtonComponent.astro";
+import BaseHead from "../components/BaseHead.astro";
+
+// Props
+interface Props {
+	title: string;
+	description: string;
+	author?: string;
+}
+
+const { title, description, author } = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title={title} description={description} author={author} />
+		<ViewTransitions />
+	</head>
+	<body class="bg-primary text-main" id="main-container">
+		<Nav />
+		<main class="grow w-full xl:max-w-[1280px] mx-auto">
+			<slot />
+		</main>
+		<ScrollButtonComponent />
+		<Footer />
+		<style is:global>
+			@tailwind base;
+			@tailwind components;
+			@tailwind utilities;
+			@layer components {
+				.container-card {
+					@apply flex items-start justify-center flex-col rounded-lg  transition duration-300 ease-in-out cursor-pointer p-4 bg-zinc-900 hover:scale-105   hover:bg-zinc-800 border-[1px] border-primary;
+				}
+			}
+			:root {
+				--accent: #2337ff;
+				--accent-dark: #000d8a;
+				--black: 15, 18, 25;
+				--gray: 96, 115, 159;
+				--gray-light: 229, 233, 240;
+				--gray-dark: 34, 41, 57;
+				--gray-gradient: rgba(var(--gray-light), 50%), #fff;
+				--box-shadow: 0 2px 6px rgba(var(--gray), 25%),
+					0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
+			}
+			body {
+				scroll-behavior: smooth;
+				overflow: auto;
+				scrollbar-width: auto;
+			}
+			body::-webkit-scrollbar {
+				width: 0.8rem;
+			}
+			body::-webkit-scrollbar-thumb {
+				background-color: #222;
+				border-radius: 10px;
+			}
+			body::-webkit-scrollbar-track {
+				background-color: #333;
+			}
+			#main-container {
+				background-image: url("/bg-grid.png");
+			}
+			.text-gradient {
+				background: linear-gradient(
+					90deg,
+					rgb(202 138 4 /1) 2.34%,
+					#420380 100.78%
+				);
+				background-clip: text;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+			/* Animations */
+			.fadeIn {
+				animation: fadeIn 1s;
+			}
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateX(-20%);
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+		</style>
+	</body>
+</html>

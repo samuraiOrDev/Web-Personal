@@ -1,0 +1,58 @@
+---
+import ElementH2 from "../ui/ElementH2.astro";
+import ElementP from "../ui/ElementP.astro";
+import { mainSection } from "../../data/siteConfig";
+import ElementH3 from "../ui/ElementH3.astro";
+---
+
+<section
+  id="main-section"
+  class="text-center flex justify-center items-center flex-col xl:max-w-[1280px] w-full sm:p-8 px-6 py-12"
+>
+  <!-- Text -->
+  <ElementH2
+    mainTitle={mainSection.mainTitle}
+    mainTitleTail={mainSection.mainTitleTail}
+  />
+  <ElementP description={mainSection.description} />
+
+  <!-- Content -->
+  <div class="w-full xl:max-w-[1280px] mt-12">
+    <div
+      class="grid grid-rows-1 sm:grid-rows-2 sm:grid-flow-col w-full xl:w-fit gap-3 mx-auto"
+    >
+      {
+        mainSection.cards.map(
+          ({ bgIcon, title, description, to, component: Icon }, index) => (
+            <div class="container-card">
+              <div
+                class={`flex items-center justify-center h-[50px] w-[50px] rounded-full`}
+                style={{ backgroundColor: bgIcon }}
+              >
+                <Icon />
+              </div>
+              <ElementH3 title={title} />
+              <ElementP description={description} card />
+
+              <a
+                href={to}
+                class="inline-flex items-center text-primary hover:underline mt-2"
+              >
+                Leer más
+                <svg
+                  class="w-5 h-5 ml-2"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                  <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                </svg>
+              </a>
+            </div>
+          ),
+        )
+      }
+    </div>
+  </div>
+</section>

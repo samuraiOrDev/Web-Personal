@@ -1,0 +1,22 @@
+---
+import AboutSection from "../components/Home/AboutSection.astro";
+import ContactSection from "../components/Home/ContactSection.astro";
+import EducationSection from "../components/Home/EducationSection.astro";
+import ExperienceSection from "../components/Home/ExperienceSection.astro";
+import HeroSection from "../components/Home/HeroSection.astro";
+import MainSection from "../components/Home/MainSection.astro";
+import SkillsSection from "../components/Home/SkillsSection.astro";
+import { frontMatterHome } from "../data/siteConfig";
+import Layout from "../layouts/Layout.astro";
+const { title, description, author } = frontMatterHome;
+---
+
+<Layout title={title} description={description} author={author}>
+  <HeroSection />
+  <MainSection />
+  <AboutSection />
+  <ExperienceSection />
+  <EducationSection />
+  <SkillsSection />
+  <ContactSection />
+</Layout>

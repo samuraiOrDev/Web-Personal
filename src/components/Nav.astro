@@ -1,0 +1,43 @@
+---
+import NavLink from "./NavLink.astro";
+const navLinks = [
+  {
+    title: "Inicio",
+    to: "/",
+  },
+  {
+    title: "Proyectos",
+    to: "/projects",
+  },
+  {
+    title: "Blog",
+    to: "/blog",
+  },
+];
+---
+
+<nav
+  class="w-full flex justify-center items-center border-t-2 border-primary mb-10"
+>
+  <ul
+    id="menu-items"
+    class="flex justify-center items-center w-fit xl:max-w-[1280px] border-primary border-2 border-t-0 border-b-2"
+    style={{
+      borderBottomLeftRadius: "1rem",
+      borderBottomRightRadius: "1rem",
+    }}
+  >
+    {
+      navLinks.map((link) => (
+        <li class="flex justify-center items-center gap-3 p-4">
+          <NavLink
+            class="text-main font-bold hover:text-primary transition ease-out duration-300 cursor-pointer"
+            href={link.to}
+          >
+            {link.title}
+          </NavLink>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

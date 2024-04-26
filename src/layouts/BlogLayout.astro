@@ -1,0 +1,203 @@
+---
+// Astro
+import { ViewTransitions } from "astro:transitions";
+// Owner
+
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import ScrollButtonComponent from "../components/ScrollButtonComponent.astro";
+import BaseHead from "../components/BaseHead.astro";
+
+// Props
+interface Props {
+	title: string;
+	description: string;
+	author?: string;
+}
+
+const { title, description, author } = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead title={title} description={description} author={author} />
+		<ViewTransitions />
+	</head>
+	<body class="bg-primary text-main" id="main-container">
+		<Nav />
+		<main class="grow w-full xl:max-w-[1280px] mx-auto">
+			<slot />
+		</main>
+		<ScrollButtonComponent />
+		<Footer />
+		<style is:global>
+			@tailwind base;
+			@tailwind components;
+			@tailwind utilities;
+			@layer components {
+				.container-card {
+					@apply flex items-start justify-center flex-col rounded-lg  transition duration-300 ease-in-out cursor-pointer p-4 bg-zinc-900 hover:scale-105   hover:bg-zinc-800 border-[1px] border-primary;
+				}
+			}
+			body {
+				scroll-behavior: smooth;
+				overflow: auto;
+				scrollbar-width: auto;
+			}
+			body::-webkit-scrollbar {
+				width: 0.8rem;
+			}
+			body::-webkit-scrollbar-thumb {
+				background-color: #222;
+				border-radius: 10px;
+			}
+			body::-webkit-scrollbar-track {
+				background-color: #333;
+			}
+			#main-container {
+				background-image: url("/bg-grid.png");
+			}
+			.text-gradient {
+				background: linear-gradient(
+					90deg,
+					rgb(202 138 4 /1) 2.34%,
+					#420380 100.78%
+				);
+				background-clip: text;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+			/* Animations */
+			.fadeIn {
+				animation: fadeIn 1s;
+			}
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+					transform: translateX(-20%);
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+			}
+			.prose {
+				width: 960px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+			}
+			.prose p {
+				margin-bottom: 2em;
+			}
+			.title {
+				margin-bottom: 1em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+			}
+			.date {
+				margin-bottom: 0.5em;
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				margin: 0 0 0.5rem 0;
+				line-height: 1.2;
+				color: #efb810;
+			}
+			h1 {
+				background: linear-gradient(
+					90deg,
+					rgb(202 138 4 /1) 2.34%,
+					#420380 100.78%
+				);
+				background-clip: text;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				font-size: 3rem;
+				line-height: 1;
+				font-weight: bold;
+				margin-bottom: 2.5rem;
+				margin-top: 2.5rem;
+			}
+			h2 {
+				font-size: 1.875rem /* 30px */;
+				line-height: 2.25rem /* 36px */;
+				margin-top: 2.5rem /* 40px */;
+				font-weight: bold;
+				background: linear-gradient(
+					90deg,
+					rgb(202 138 4 /1) 2.34%,
+					#420380 100.78%
+				);
+				background-clip: text;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+			h3 {
+				font-size: 1.953em;
+			}
+			h4 {
+				font-size: 1.563em;
+			}
+			h5 {
+				font-size: 1.25em;
+			}
+			strong,
+			b {
+				font-weight: 700;
+			}
+			code {
+				padding: 2px 5px;
+				border-radius: 2px;
+				color: rgb(202 138 4 /1);
+				background-color: #222;
+			}
+			pre {
+				padding: 1.5em;
+				border-radius: 8px;
+			}
+			pre > code {
+				all: unset;
+			}
+			blockquote {
+				padding: 0 0 0 20px;
+				margin: 0px;
+				font-size: 1.333em;
+			}
+			p {
+				margin-top: 1.25rem /* 20px */;
+				margin-bottom: 0.5rem /* 8px */;
+				text-align: start;
+				font-size: 1.125rem /* 18px */;
+				line-height: 1.75rem /* 28px */;
+			}
+			ul {
+				margin-left: 1.25rem;
+			}
+			ul li {
+				list-style-type: disc;
+				margin-bottom: 0.5rem;
+			}
+		</style>
+	</body>
+</html>

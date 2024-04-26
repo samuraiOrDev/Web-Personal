@@ -1,0 +1,21 @@
+---
+import ElementH2 from "../ui/ElementH2.astro";
+import Form from "./contact/Form.astro";
+import RRSSContact from "./contact/RRSSContact.astro";
+RRSSContact;
+Form;
+---
+
+<section
+  class="flex justify-center items-center gap-5 mx-auto xl:max-w-[1280px] w-full flex-col sm:px-16 px-6 sm:pb-16 xs:pb-8 pb-12 sm:pt-6 mt-[40px] overflow-x-hidden"
+  id="about-section"
+>
+  <ElementH2 mainTitle="Contacto" textGradient />
+
+  <div
+    class="flex flex-col md:flex-row gap-y-6 items-center md:items-start justify-start md:justify-start md:gap-x-6 xl:max-w-[1024px] w-ful"
+  >
+    <Form />
+    <RRSSContact />
+  </div>
+</section>

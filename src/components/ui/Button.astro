@@ -1,0 +1,21 @@
+---
+interface Props {
+  bgColor?: string;
+  title: string;
+  to: string;
+  target?: string;
+}
+const { bgColor = "bg-secondary", title, to, target } = Astro.props as Props;
+---
+
+<a
+  href={to}
+  class:list={[
+    bgColor,
+    "flex flex-row justify-center items-center py-3 px-6 rounded-full cursor-pointer w-[250px] sm:w-fit transition duration-300 hover:scale-105 font-bold text-white",
+  ]}
+  title={title}
+  target={target}
+>
+  {title}
+</a>

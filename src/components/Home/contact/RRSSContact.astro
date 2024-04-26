@@ -1,0 +1,59 @@
+---
+import Email from "../../Svg/Email.astro";
+import GitHub from "../../Svg/GitHub.astro";
+import Linkedin from "../../Svg/Linkedin.astro";
+
+const icons = [
+  {
+    bg: "bg-indigo-500",
+    svg: Linkedin,
+    title: "Social Linkedin",
+    to: "https://www.linkedin.com/in/v%C3%ADctor-manuel-ordiales-garc%C3%ADa/",
+    target: "_blanck",
+  },
+  {
+    bg: "bg-red-500",
+    svg: Email,
+    title: "Socail Email",
+    to: "mailto:samurai.dev.ordiales@gmail.com",
+  },
+  {
+    bg: "bg-gray-500",
+    svg: GitHub,
+    title: "Social GitHub",
+    to: "https://github.com/samuraiOrDev",
+    target: "_blanck",
+  },
+];
+---
+
+<div class="w-full md:w-1/2">
+  <div
+    id="media-icons"
+    class="flex flex-wrap items-center justify-center space-x-2 gap-y-2 mx-auto mt-6 md:justify-start"
+  >
+    {
+      icons.map(({ to, target, svg: Icon, bg }) => (
+        <a
+          href={to}
+          target={target}
+          class:list={[
+            "mb-2 inline-block rounded px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg",
+            bg,
+          ]}
+        >
+          <Icon />
+        </a>
+      ))
+    }
+  </div>
+  <p
+    class="mt-6 flex flex-col items-center md:items-start justify-center text-center md:justify-start md:text-start"
+  >
+    <span class="text-primary md:text-start text-center mb-3">
+      Gracias por visitar mi web personal !!.
+    </span>
+    Espero que hayas disfrutado explorando mi trabajo y que hayas obtenido una idea
+    clara de mis habilidades y experiencia.
+  </p>
+</div>

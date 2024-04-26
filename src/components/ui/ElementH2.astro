@@ -1,0 +1,46 @@
+---
+interface Props {
+  mainTitle: string;
+  mainTitleTail?: string;
+  lineBreak?: boolean;
+  textGradient?: boolean;
+}
+const {
+  mainTitle,
+  mainTitleTail,
+  lineBreak = false,
+  textGradient = false,
+} = Astro.props as Props;
+---
+
+{
+  lineBreak == false && mainTitleTail && (
+    <h2 class="text-white font-bold sm:text-[48px] sm:leading-[52px] text-[30px] leading-[36px] xs:tracking-[-0.5%] tracking-[-0.25%]">
+      {mainTitle} <span class="text-gradient">{mainTitleTail}</span>
+    </h2>
+  )
+}
+{
+  !mainTitleTail && !textGradient && (
+    <h2 class="text-white font-bold sm:text-[48px] sm:leading-[52px] text-[30px] leading-[36px] xs:tracking-[-0.5%] tracking-[-0.25%]">
+      {mainTitle}
+    </h2>
+  )
+}
+{
+  lineBreak && mainTitleTail && (
+    <h2 class="text-white font-bold sm:text-[48px] sm:leading-[60px] text-[30px] leading-[36px] xs:tracking-[-0.5%] tracking-[-0.25%]">
+      {mainTitle} <br />
+      <span class="text-gradient" style={{ marginLeft: "40px" }}>
+        {mainTitleTail}
+      </span>
+    </h2>
+  )
+}
+{
+  !mainTitleTail && textGradient && (
+    <h2 class="text-gradient font-bold sm:text-[48px] sm:leading-[52px] text-[30px] leading-[36px] xs:tracking-[-0.5%] tracking-[-0.25%]">
+      {mainTitle}
+    </h2>
+  )
+}
